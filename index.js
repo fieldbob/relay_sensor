@@ -6,7 +6,7 @@ var port = Number(process.env.PORT || 4444);
 
 server.connection({ port: port, routes: { cors: true } });
 
-var client  = mqtt.connect('mqtt://test.mosquitto.org:1883');
+var client  = mqtt.connect('mqtt://85.119.83.194:1883');
 
 var mqttPublish = function(topic, msg){
   client.publish(topic, msg, function() {
@@ -16,12 +16,12 @@ var mqttPublish = function(topic, msg){
 
 server.route([
   {
-    method: 'POST',
-    path: '/relay',
+    method: 'GET',
+    path: '/relay/{no}/{onoff}',
     handler: function (request, reply) {
- deviceInfo = request.payload.deviceNum + '-' + request.payload.command;
+      var deviceInfo = 'dev	' + encodeURIComponent(request.params.no)+ '-' +encodeURIComponent(request.params.onoff) ;
       reply(deviceInfo);
-      mqttPublish('relay', deviceInfo, {
+      mqttPublish('device/control', deviceInfo, {
         'qos' : 2
       });
     }
