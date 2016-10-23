@@ -17,11 +17,11 @@ var mqttPublish = function(topic, msg){
 server.route([
   {
     method: 'POST',
-    path: '/bob/relay',
+    path: '/device/control',
     handler: function (request, reply) {
-      var deviceInfo = 'dev' + request.payload.deviceNum + '-' + request.payload.command;
+ deviceInfo = 'dev' + request.payload.deviceNum + '-' + request.payload.command;
       reply(deviceInfo);
-      mqttPublish('bob/relay', deviceInfo, {
+      mqttPublish('device/control', deviceInfo, {
         'qos' : 2
       });
     }
