@@ -17,7 +17,7 @@ var mqttPublish = function(topic, msg){
 server.route([
   {
     method: 'POST',
-    path: '/relay
+    path: '/relay',
     handler: function (request, reply) {
  deviceInfo = request.payload.deviceNum + '-' + request.payload.command;
       reply(deviceInfo);
