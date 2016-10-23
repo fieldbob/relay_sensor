@@ -19,7 +19,7 @@ server.route([
     method: 'GET',
     path: '/relay/{no}/{onoff}',
     handler: function (request, reply) {
-      var deviceInfo = 'dev	' + encodeURIComponent(request.params.no)+ '-' +encodeURIComponent(request.params.onoff) ;
+      var deviceInfo = 'dev' + encodeURIComponent(request.params.no)+ '-' +encodeURIComponent(request.params.onoff) ;
       reply(deviceInfo);
       mqttPublish('device/control', deviceInfo, {
         'qos' : 2
